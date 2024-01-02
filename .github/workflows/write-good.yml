@@ -32,7 +32,7 @@ jobs:
         JSON
     - name: check prose
       id: write-good
-      run: a=`git ls-files '*.md' | grep -v docs/CHECKSRC.md` && proselint $a README
+      run: a=`git ls-files '*.md'` && proselint $a
 
     - name: Get the write-good output
       run: echo "${{ steps.write-good.outputs.result }}"
