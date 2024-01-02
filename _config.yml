@@ -1,3 +1,7 @@
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
 - jekyll-remote-theme
+
+title: Testing Github Page
+description: I am testing github page
+show_downloads: true
