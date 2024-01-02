@@ -14,15 +14,26 @@ jobs:
       pull-requests: write
     name: A job to lint Markdown files
     steps:
-    - uses: actions/checkout@v2
-    - name: write-good action step
+    - uses: actions/checkout@v4
+
+    - name: create proselint config
+      run: |
+        cat <<JSON > $HOME/.proselintrc
+        {
+          "checks": {
+            "typography.diacritical_marks": false,
+            "typography.symbols": false,
+            "annotations.misc": false
+          }
+        }
+        JSON
+    - name: check prose
       id: write-good
-      uses: tomwhross/write-good-action@v1.6
-      # with:
-      #   directory: "manuscript" # Optional, uncomment to specify a directory to scan
-    # Use the output from the `write-good` step
+      run: a=`git ls-files '*.md' | grep -v docs/CHECKSRC.md` && proselint $a README
+
     - name: Get the write-good output
       run: echo "${{ steps.write-good.outputs.result }}"
+
     - name: Post comment
       uses: mshick/add-pr-comment@v1
       if: ${{ steps.write-good.outputs.result }}
