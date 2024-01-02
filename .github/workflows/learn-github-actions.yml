@@ -1,0 +1,12 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [push]
+jobs:
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: ShellCheck
+      uses: ludeeus/action-shellcheck@2.0.0
+  on: [push]
