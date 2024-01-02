@@ -16,6 +16,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: install prereqs
+      run: sudo apt-get install python3-proselint
+
     - name: create proselint config
       run: |
         cat <<JSON > $HOME/.proselintrc
